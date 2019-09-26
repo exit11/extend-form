@@ -1,0 +1,33 @@
+{
+    "name": "exit11/extend-form",
+    "description": "Exit11's laravel-admin extension forms",
+    "type": "library",
+    "keywords": ["laravel-admin", "extension"],
+    "homepage": "https://exit11.co.kr",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Hwajun Lee",
+            "email": "ezrock@naver.com"
+        }
+    ],
+    "require": {
+        "php": "^7.2",
+        "encore/laravel-admin": "^1.7"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Exit11\\ExtendForm\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Exit11\\ExtendForm\\ExtendFormServiceProvider"
+            ]
+        }
+    }
+}
