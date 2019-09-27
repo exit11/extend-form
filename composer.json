@@ -5,6 +5,7 @@
     "keywords": ["laravel-admin", "extension"],
     "homepage": "https://exit11.co.kr",
     "license": "MIT",
+    "minimum-stability": "dev",
     "authors": [
         {
             "name": "Hwajun Lee",
@@ -12,11 +13,11 @@
         }
     ],
     "require": {
-        "php": "^7.2",
-        "encore/laravel-admin": "^1.7"
+        "php": ">=7.0.0",
+        "exit11/admin": "~1.6"
     },
     "require-dev": {
-        "phpunit/phpunit": "^8.0"
+        "phpunit/phpunit": "~6.0"
     },
     "autoload": {
         "psr-4": {
