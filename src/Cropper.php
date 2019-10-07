@@ -160,7 +160,7 @@ function cropper(imgSrc,id,w,h)
     layer.open({
         type: 1,
         skin: 'layui-layer-demo', //스킨명
-        area: ['800px', '600px'],
+        area: ['90%', '90%'],
         closeBtn: 2, //두 번째 닫기 버튼
         anim: 2,
         resize: false,
@@ -193,8 +193,8 @@ function cropper(imgSrc,id,w,h)
 
     var image = document.getElementById('cropping-img');
     var cropper = new Cropper(image, {
-        //aspectRatio: w / h,
-        aspectRatio: 16 / 9,
+        aspectRatio: w / h,
+        //aspectRatio: 16 / 9,
         viewMode: 2,
     });
 }
