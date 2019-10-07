@@ -37,6 +37,7 @@ class ExtendFormServiceProvider extends ServiceProvider
         Admin::booting(function () {
             Form::extend('address', Address::class);
             Form::extend('cropper', Cropper::class);
+            Form::extend(ExtendForm::config('field_type', 'Editorjs'), Editor::class);
         });
 
     }
