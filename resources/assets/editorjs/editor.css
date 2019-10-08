@@ -1,0 +1,22 @@
+.editorjs-wrap {
+    background-color: #eee;
+    border-radius: 15px;
+    padding: 15px;
+    padding-top: 5px;
+}
+.editorjs-wrap .ce-block__content, 
+.editorjs-wrap .ce-toolbar__content {
+    max-width: calc(100% - 80px);
+}
+.editorjs-wrap .header {
+}
+.editorjs-wrap .editor-wrapper {
+    border: 1px solid #aaa;
+    background-color: #fff;
+    padding-top: 40px;
+}
+
+.cdx-notifies {
+    left: inherit;
+    right: 20px;
+}

@@ -8,21 +8,25 @@ class Editor extends Field
 {
   
     public static $js = [
-        //'/vendor/exit11/extend-form/editorjs/editor.js',
-        'https://cdn.jsdelivr.net/npm/@editorjs/header@latest',
-        'https://cdn.jsdelivr.net/npm/@editorjs/simple-image@latest',
-        'https://cdn.jsdelivr.net/npm/@editorjs/delimiter@latest',
-        'https://cdn.jsdelivr.net/npm/@editorjs/list@latest',
+        'https://cdn.jsdelivr.net/npm/@editorjs/attaches@1.0.0',
         'https://cdn.jsdelivr.net/npm/@editorjs/checklist@latest',
-        'https://cdn.jsdelivr.net/npm/@editorjs/quote@latest',
         'https://cdn.jsdelivr.net/npm/@editorjs/code@latest',
+        'https://cdn.jsdelivr.net/npm/@editorjs/delimiter@latest',
         'https://cdn.jsdelivr.net/npm/@editorjs/embed@latest',
-        'https://cdn.jsdelivr.net/npm/@editorjs/table@latest',
-        'https://cdn.jsdelivr.net/npm/@editorjs/link@latest',
-        'https://cdn.jsdelivr.net/npm/@editorjs/warning@latest',
-        'https://cdn.jsdelivr.net/npm/@editorjs/marker@latest',
+        'https://cdn.jsdelivr.net/npm/@editorjs/header@latest',
         'https://cdn.jsdelivr.net/npm/@editorjs/inline-code@latest',
+        'https://cdn.jsdelivr.net/npm/@editorjs/link@latest',
+        'https://cdn.jsdelivr.net/npm/@editorjs/list@latest',
+        'https://cdn.jsdelivr.net/npm/@editorjs/marker@latest',
+        'https://cdn.jsdelivr.net/npm/@editorjs/quote@latest',
+        'https://cdn.jsdelivr.net/npm/@editorjs/simple-image@latest',
+        'https://cdn.jsdelivr.net/npm/@editorjs/table@latest',
+        'https://cdn.jsdelivr.net/npm/@editorjs/warning@latest',
+        //'https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest',
         '/vendor/exit11/extend-form/editorjs/editor.js',
+        
+        /* Preview */
+        '/vendor/exit11/extend-form/editorjs/editorjs-json-to-html.js',
     ];
     
     protected static $css = [
@@ -82,7 +86,7 @@ class Editor extends Field
          */
         image: {
           class: SimpleImage,
-          inlineToolbar: ['link'],
+          inlineToolbar: true,
         },
 
         list: {
@@ -127,7 +131,19 @@ class Editor extends Field
 
         linkTool: LinkTool,
 
-        embed: Embed,
+        embed: {
+          class: Embed,
+          config: {
+            services: {
+              youtube: true,
+              coub: true,
+              imgur: true,
+              codepen: true,
+              vimeo: true,
+              gfycat: true,
+            }
+          }
+        },
 
         table: {
           class: Table,
@@ -151,7 +167,8 @@ class Editor extends Field
       },
       onChange: function() {
         editor.save().then((savedData) => {
-            editorjsValue = JSON.stringify(savedData);
+            document.getElementById("inputEditorjs").value = JSON.stringify(savedData);
+            var editorjs_innerHTML_data = f_editorjs_convert_json_to_html(savedData);
         });
       }
     });
