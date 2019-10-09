@@ -129,8 +129,12 @@ class Editor extends Field
           shortcut: 'CMD+SHIFT+C'
         },
 
-        linkTool: LinkTool,
-
+        linkTool: {
+          class: LinkTool,
+          config: {
+            endpoint: '/editor/fetchURL', // Your backend endpoint for url data fetching
+          }
+        },
         embed: {
           class: Embed,
           config: {

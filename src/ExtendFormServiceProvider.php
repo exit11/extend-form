@@ -31,6 +31,7 @@ class ExtendFormServiceProvider extends ServiceProvider
         }
 
         $this->app->booted(function () {
+            $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
             $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'extend-form');
         });
 
