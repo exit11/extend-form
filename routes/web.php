@@ -9,5 +9,7 @@ Route::group([
 ], function (Router $router) {
     
     $router->get('editor/fetchURL', 'EditorController@fetchURL');
+    $router->post('editor/uploadImage', 'EditorController@uploadImage');
+    $router->post('editor/fetchImageUrl', 'EditorController@fetchImageUrl');
     
 });

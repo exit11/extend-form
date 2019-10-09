@@ -14,14 +14,15 @@ class Editor extends Field
         'https://cdn.jsdelivr.net/npm/@editorjs/delimiter@latest',
         'https://cdn.jsdelivr.net/npm/@editorjs/embed@latest',
         'https://cdn.jsdelivr.net/npm/@editorjs/header@latest',
+        'https://cdn.jsdelivr.net/npm/@editorjs/image@2.3.0',
         'https://cdn.jsdelivr.net/npm/@editorjs/inline-code@latest',
         'https://cdn.jsdelivr.net/npm/@editorjs/link@latest',
         'https://cdn.jsdelivr.net/npm/@editorjs/list@latest',
         'https://cdn.jsdelivr.net/npm/@editorjs/marker@latest',
         'https://cdn.jsdelivr.net/npm/@editorjs/quote@latest',
-        'https://cdn.jsdelivr.net/npm/@editorjs/simple-image@latest',
         'https://cdn.jsdelivr.net/npm/@editorjs/table@latest',
         'https://cdn.jsdelivr.net/npm/@editorjs/warning@latest',
+        //'https://cdn.jsdelivr.net/npm/@editorjs/simple-image@latest',
         //'https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest',
         '/vendor/exit11/extend-form/editorjs/editor.js',
         
@@ -81,14 +82,6 @@ class Editor extends Field
           shortcut: 'CMD+SHIFT+H'
         },
 
-        /**
-         * Or pass class directly without any configuration
-         */
-        image: {
-          class: SimpleImage,
-          inlineToolbar: true,
-        },
-
         list: {
           class: List,
           inlineToolbar: true,
@@ -128,6 +121,19 @@ class Editor extends Field
           class: InlineCode,
           shortcut: 'CMD+SHIFT+C'
         },
+        
+        image: {
+          class: ImageTool,
+          config: {
+            endpoints: {
+              byFile: '/editor/uploadImage', // Your backend file uploader endpoint
+              byUrl: '/editor/fetchImageUrl', // Your endpoint that provides uploading by Url
+            },
+            additionalRequestHeaders: {
+                'X-CSRF-TOKEN': LA.token
+            }
+          }
+        },
 
         linkTool: {
           class: LinkTool,
@@ -135,6 +141,7 @@ class Editor extends Field
             endpoint: '/editor/fetchURL', // Your backend endpoint for url data fetching
           }
         },
+        
         embed: {
           class: Embed,
           config: {
