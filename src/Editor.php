@@ -55,6 +55,8 @@ class Editor extends Field
     } else {
         editorjsData = JSON.parse(editorjsValue);
     }
+    
+    var editorjs_innerHTML_data;
 
     /**
      * To initialize the Editor, create a new instance with configuration object
@@ -176,12 +178,16 @@ class Editor extends Field
       onReady: function(){
       
       },
-      onChange: function() {
+      onChange: function(editorjs_innerHTML_data) {
         editor.save().then((savedData) => {
             document.getElementById("inputEditorjs").value = JSON.stringify(savedData);
-            var editorjs_innerHTML_data = f_editorjs_convert_json_to_html(savedData);
+            $('#dialogEditorPreview').find('.modal-body').html(f_editorjs_convert_json_to_html(savedData));
         });
       }
+    });
+    
+    $('#dialogEditorPreview').on('show.bs.modal', function (event) {
+        
     });
     
 EOT;

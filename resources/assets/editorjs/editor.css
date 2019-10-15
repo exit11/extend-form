@@ -9,6 +9,10 @@
     max-width: calc(100% - 80px);
 }
 .editorjs-wrap .header {
+    position: relative;
+}
+.editorjs-wrap .header .header-btns {
+    position: absolute;
 }
 .editorjs-wrap .editor-wrapper {
     border: 1px solid #aaa;

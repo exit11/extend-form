@@ -1,11 +1,11 @@
 function f_editorjs_convert_json_to_html(json) {
     var output_HTML = '';
-    output_HTML += '<div class="codex-editor">\n';
+    output_HTML += '<div class="content-preview">\n';
     output_HTML += '<div class="codex-editor__redactor">\n';
     json.blocks.map( function(obj) {
         switch (obj.type) {
             case 'delimiter':
-                output_HTML += '<div class="ce-block"><div class="ce-block__content"><div class="ce-delimiter cdx-block"></div></div></div>\n';
+                output_HTML += '<hr class="ce-delimiter" />\n';
                 break;
 
             case 'checklist':
