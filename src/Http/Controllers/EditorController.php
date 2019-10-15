@@ -9,8 +9,20 @@ use Illuminate\Support\Facades\Storage;
 
 use OpenGraph;
 
+use Exit11\ExtendForm\Models\Editor;
+
 class EditorController extends Controller
 {
+    
+    
+    public function drawEditorBlocks(Request $request)
+    {
+        $content = $request->content;
+        
+        return Editor::drawEditorBlocks($content);
+        
+    }
+    
     /**
      * Editorjs Link 플러그인
      * @param  [[Type]] Request $request [[Description]]
@@ -80,4 +92,5 @@ class EditorController extends Controller
         
         return response()->json($result, 200);
     }
+    
 }

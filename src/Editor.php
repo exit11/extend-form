@@ -181,13 +181,28 @@ class Editor extends Field
       onChange: function(editorjs_innerHTML_data) {
         editor.save().then((savedData) => {
             document.getElementById("inputEditorjs").value = JSON.stringify(savedData);
-            $('#dialogEditorPreview').find('.modal-body').html(f_editorjs_convert_json_to_html(savedData));
         });
       }
     });
     
-    $('#dialogEditorPreview').on('show.bs.modal', function (event) {
+    $('.btn-editor-preview').on('click', function (event) {
         
+        editor.save().then((savedData) => {
+            $.ajax({
+                traditional: true,
+                type: "GET",
+                url: "/editor/drawEditorBlocks",
+                data: {
+                    "content": JSON.stringify(savedData)
+                },
+                beforeSend: function(jx, settings) {
+                },
+                success:function(response) {
+                    $('#dialogEditorPreview').find('.modal-body').html(response);
+                }
+
+            });
+        });
     });
     
 EOT;
