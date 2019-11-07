@@ -29,7 +29,7 @@ class ExtendForm extends Extension
             
             $curentFileExtension = strtolower($curentFilePathInfo['extension']);
             
-            $image_extensions = ['jpg', 'png', 'gif', 'jpeg', 'wepp'];
+            $image_extensions = ['jpg', 'png', 'gif', 'jpeg', 'webp'];
             $pdf_extensions = ['pdf'];
         
             if(in_array($curentFileExtension, $image_extensions)){
