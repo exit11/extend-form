@@ -6,6 +6,7 @@ use Illuminate\Routing\Controller;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 use OpenGraph;
 
@@ -13,14 +14,11 @@ use Exit11\ExtendForm\Models\Editor;
 
 class EditorController extends Controller
 {
-    
-    
     public function drawEditorBlocks(Request $request)
     {
         $content = $request->content;
         
         return Editor::drawEditorBlocks($content);
-        
     }
     
     /**
@@ -47,7 +45,7 @@ class EditorController extends Controller
     }
     
     /**
-     * Editorjs Image 플러그인 파일업로드
+     * elTiptap Image 플러그인 파일업로드
      * @param  [[Type]] Request $request [[Description]]
      * @return [[Type]] [[Description]]
      */
@@ -55,8 +53,8 @@ class EditorController extends Controller
     {
         $file = $request->image;
         $path = Storage::disk('admin')->getAdapter()->getPathPrefix();
-        if(is_file($file)){
-            $filename = round(microtime(true)*1000).'_'.filter_var($file->getClientOriginalName(), FILTER_SANITIZE_URL);
+        if (is_file($file)) {
+            $filename = round(microtime(true)*1000).'_'.Str::random(10);
             Storage::disk('admin')->putFileAs('editor_images', $file, $filename, 'public');
             
             // 이미지가 가로 1140px보다 클 경우 1140px로 줄임
@@ -67,10 +65,7 @@ class EditorController extends Controller
         }
         
         $result = [
-            'success' => 1,
-            'file' => [
-                'url' => Storage::disk('admin')->url('editor_images/'.$filename),
-            ],
+            'url' => Storage::disk('admin')->url('editor_images/'.$filename),
         ];
         
         return response()->json($result, 200);
@@ -92,5 +87,4 @@ class EditorController extends Controller
         
         return response()->json($result, 200);
     }
-    
 }

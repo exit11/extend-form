@@ -48,11 +48,11 @@ class Cropper extends File
 
         $extension    = $result[2];
         $directory    = ltrim($this->getDirectory(), '/');
-        $file_name    = $this->getStoreBasename() . '.' . $extension;
+        $file_name    = round(microtime(true)*1000).'_'.$this->getStoreBasename() . '.' . $extension;
         $file_content = base64_decode(str_replace($result[1], '', $base64ImageContent));
         $file_path    = $directory . '/' . $file_name;
 
-        Storage::disk(config('admin.upload.disk'))->put($file_path ,  $file_content);
+        Storage::disk(config('admin.upload.disk'))->put($file_path, $file_content);
 
         return $file_path ;
     }
@@ -96,21 +96,21 @@ class Cropper extends File
     public function prepare($base64)
     {
         //base64 인코딩 여부 점검
-        if (preg_match('/data:image\/.*?;base64/is',$base64)) {
+        if (preg_match('/data:image\/.*?;base64/is', $base64)) {
             $imagePath = $this->storeBase64Image($base64);
             $this->destroy();
             $this->callInterventionMethods($imagePath);
             return $imagePath;
         } else {
             $directory = ltrim($this->getDirectory(), '/');
-            $directory = str_replace('/',"\/",$directory);
-            preg_match('/' . $directory . '\/.*/is',$base64,$matches);
+            $directory = str_replace('/', "\/", $directory);
+            preg_match('/' . $directory . '\/.*/is', $base64, $matches);
             return isset($matches[0]) ? $matches[0] : $base64;
         }
     }
 
 
-    public function cRatio($width,$height)
+    public function cRatio($width, $height)
     {
         if (!empty($width) and is_numeric($width)) {
             $this->attributes['data-w'] = $width;
@@ -238,5 +238,4 @@ EOT;
 
         return view($this->getView(), $this->variables());
     }
-
 }

@@ -26,7 +26,11 @@ class ExtendFormServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole() && $assets = $extension->assets()) {
             $this->publishes(
                 [$assets => public_path('vendor/exit11/extend-form')],
-                'extend-form'
+                'extend-form-assets'
+            );
+            $this->publishes(
+                [__DIR__.'/../resources/fonts' => public_path('fonts')],
+                'extend-form-fonts'
             );
         }
 
@@ -40,6 +44,5 @@ class ExtendFormServiceProvider extends ServiceProvider
             Form::extend('cropper', Cropper::class);
             Form::extend(ExtendForm::config('field_type', 'Editorjs'), Editor::class);
         });
-
     }
 }
